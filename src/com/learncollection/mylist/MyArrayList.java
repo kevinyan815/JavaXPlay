@@ -3,7 +3,7 @@ package com.learncollection.mylist;
 import javax.management.ObjectName;
 import java.util.*;
 
-public class MyArrayList implements List {
+public class MyArrayList<T> implements List {
 
     private Object[] elements;
 
@@ -35,6 +35,23 @@ public class MyArrayList implements List {
 
         return false;
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<>() {
+            int pointer = 0;
+            @Override
+            public boolean hasNext() {
+                return pointer < MyArrayList.this.size();
+            }
+
+            @Override
+            public T next() {
+                return (T)elements[pointer++];
+            }
+        };
+    }
+
     @Override
     public void clear() {
         elements = null;
@@ -67,10 +84,7 @@ public class MyArrayList implements List {
 
 
 
-    @Override
-    public Iterator iterator() {
-        throw new UnsupportedOperationException();
-    }
+
 
     @Override
     public Object[] toArray() {

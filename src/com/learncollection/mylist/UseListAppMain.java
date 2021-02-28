@@ -11,6 +11,7 @@ public class UseListAppMain {
         printCollection(addElementsToCollection(new LinkedList()));
 
         printCollection(addElementsToCollection(new MyArrayList()));
+        // 因为MyLinkedList没有实现方法Iterator方法所以会抛出异常
         printCollection(addElementsToCollection(new MyLinkedList()));
 
 //        printList((List) addElementsToCollection(new ArrayList()));
