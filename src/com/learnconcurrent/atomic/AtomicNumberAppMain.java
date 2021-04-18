@@ -1,4 +1,4 @@
-package com.learnconcurrent;
+package com.learnconcurrent.atomic;
 
 import java.util.ArrayList;
 import java.util.List;
