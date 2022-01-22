@@ -25,6 +25,8 @@ public class CreateDirAndFileAppMain {
 
         deleteFiles(newDir, fileNameNew);
 
+        deleteFiles(newDir, fileNameNew);
+
         deleteDir(newDir);
     }
 
@@ -67,7 +69,7 @@ public class CreateDirAndFileAppMain {
     }
 
     private static File renameDir(File dir) {
-        System.out.println("请输入新的文件夹的名字：");
+        System.out.println("重命名--请输入新的文件夹的名字：");
         String newDirName = scanner.nextLine().trim();
 
         File newDir = new File(dir.getParentFile(), newDirName);
@@ -111,7 +113,7 @@ public class CreateDirAndFileAppMain {
 
     private static void deleteFiles(File newDir, String fileNameNew) {
         System.out.println("删除文件？");
-
+        // 命令行里要输入 true 或者 false 只是是否删除文件
         boolean deleteFiles = scanner.nextBoolean();
 
         if (deleteFiles) {
@@ -122,15 +124,28 @@ public class CreateDirAndFileAppMain {
         }
     }
 
-    private static void deleteDir(File newDir) {
+    private static void removeDir(File dir) {
         System.out.println("删除文件夹？");
 
         boolean deleteDir = scanner.nextBoolean();
 
-        // TODO 删除文件夹的前提是文件夹是空的，否则将删除失败
         if (deleteDir) {
-            System.out.println("删除文件夹：" + newDir.delete());
+            deleteDir(dir);
         }
+    }
+
+    public static boolean deleteDir(File dir){
+        File[] files = dir.listFiles();
+        if(files != null){
+            for(File file : files){
+                if(file.isDirectory()){
+                    deleteDir(file);
+                } else {
+                    file.delete();
+                }
+            }
+        }
+        return dir.delete();
     }
 
 }
