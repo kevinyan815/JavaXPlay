@@ -37,9 +37,12 @@ public class WriteToFilesAppMain {
                     break;
                 } else {
                     pw.println(lineToWrite);
+                    // 真正用的时候不要写一行就flush() 这里只是演示
+                    pw.flush();
                 }
             }
-            pw.flush();
+            // 平时用的时候放在外面 flush
+            // pw.flush();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
