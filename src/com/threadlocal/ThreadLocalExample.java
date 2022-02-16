@@ -2,7 +2,17 @@ package com.threadlocal;
 
 public class ThreadLocalExample {
 
-    private  ThreadLocal<Integer> threadLocal = new ThreadLocal<Integer>();
+    private  ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
+
+//   下面是为 ThreadLocal 实例提供初始值的两种方式，一般是推荐使用 withInitial
+//    private ThreadLocal threadLocal = new ThreadLocal<Integer>() {
+//        @Override protected Integer initialValue() {
+//            return (int) System.currentTimeMillis();
+//        }
+//    };
+//
+//    private ThreadLocal<Integer> threadLocal = ThreadLocal.withInitial(() -> (int) System.currentTimeMillis());
+
 
     private void setAndPrintThreadLocal() {
         threadLocal.set((int) (Math.random() * 100D) );
