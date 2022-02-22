@@ -34,7 +34,7 @@ public class LearnLockWaitNotifyAppMain {
         }
 
         // >> TODO await / signal 一样也有 lost notification 的问题
-        System.out.println("------------- 唤醒线程开始sleep -------------");
+        System.out.println("------------- 主线程作为唤醒线程，先sleep -------------");
         sleepSec(workingSec + 1);
         System.out.println("------------- 唤醒线程sleep结束 -------------");
         try {
@@ -43,15 +43,9 @@ public class LearnLockWaitNotifyAppMain {
             System.out.println("------------- 开始唤醒所有 -------------");
             condition.signalAll();
 
-//            for (int i = 0; i < threadCount; i++) {
-//                System.out.println("------------- 开始逐个唤醒 -------------");
-//                condition.signal();
-//            }
         } finally {
             locker.unlock();
         }
-
-
     }
 
     private static void sleepSec(int sec) {
