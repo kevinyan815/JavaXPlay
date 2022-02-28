@@ -2,6 +2,9 @@ package com.learnconcurrent.threadpool;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.*;
 
 public class ThreadPoolExecutorDemo {
@@ -11,7 +14,9 @@ public class ThreadPoolExecutorDemo {
     public static void main(String[] args) {
         ThreadPoolExecutorDemo threadPoolDemo = new ThreadPoolExecutorDemo();
 //        threadPoolDemo.executeDemo();
-        threadPoolDemo.submitCallableDemo();
+//        threadPoolDemo.submitCallableDemo();
+//        threadPoolDemo.invokeAnyDemo();
+        threadPoolDemo.invokeAllDemo();
         // 关闭线程池
         threadPoolDemo.executorService.shutdown();
     }
@@ -51,6 +56,40 @@ public class ThreadPoolExecutorDemo {
 
         try {
             System.out.println("执行结果是：" + future.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void invokeAnyDemo() {
+        Set<Callable<String>> callables = new HashSet<>();
+        callables.add(() -> "Task 1");
+        callables.add(() -> "Task 2");
+        callables.add(() -> "Task 3");
+        try {
+            String result = executorService.invokeAny(callables);
+            System.out.println("result = " + result);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void invokeAllDemo() {
+        Set<Callable<String>> callables = new HashSet<>();
+
+        callables.add(() -> "Task 1");
+        callables.add(() -> "Task 2");
+        callables.add(() -> "Task 3");
+
+        try {
+            List<Future<String>> futures = executorService.invokeAll(callables);
+            for(Future<String> future : futures){
+                System.out.println("future.get = " + future.get());
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
