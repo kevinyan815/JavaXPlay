@@ -8,8 +8,9 @@ public class AtomicIntegerDemo {
     public static void main(String[] args) throws InterruptedException {
         // 创建一个核心线程数、最大线程数都是5 的线程池
         ExecutorService executorService = Executors.newFixedThreadPool(5);
-
+        // 使用 AtomicInteger 创建计数器变量
         AtomicInteger count = new AtomicInteger(0);
+        // 用线程池的多个线程并发执行累加
         for (int i = 0; i < 1000; i++) {
             executorService.submit((Runnable) () -> {
                 System.out.println(Thread.currentThread().getName() + " count=" + count.get());
