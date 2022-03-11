@@ -6,10 +6,10 @@ public class AtomicIntegerArrayDemo {
 
     private static AtomicIntegerArray atomicIntegerArray = new AtomicIntegerArray(10);
 
-    static { // 还可以以下面这种提供一个 int[] 给构造方法的方式创建 AtomicIntegerArray
-        int[] nums = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        atomicIntegerArray = new AtomicIntegerArray(nums);
-    }
+//    static { // 还可以以下面这种提供一个 int[] 给构造方法的方式创建 AtomicIntegerArray
+//        int[] nums = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+//        atomicIntegerArray = new AtomicIntegerArray(nums);
+//    }
 
     public static void main(final String[] arguments) throws InterruptedException {
         System.out.println("Init Values: ");
