@@ -1,4 +1,4 @@
-package com.learncollection;
+package com.learncollection.learnstream;
 
 import java.util.ArrayList;
 import java.util.List;
