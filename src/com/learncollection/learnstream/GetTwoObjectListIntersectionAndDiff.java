@@ -1,9 +1,7 @@
 package com.learncollection.learnstream;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class GetTwoObjectListIntersectionAndDiff {
@@ -51,6 +49,12 @@ public class GetTwoObjectListIntersectionAndDiff {
         System.out.println("----------bList 与 aList 的差集为：");
         System.out.println(differences);
 
+        // 上面的执行效率不高，--每个bList 的元素都要在noneMatch里判断在aList里有没有跟它ID重复的对象，相当于整个筛选是O(N²)的复杂度，
+        // 所以可以先把aList 转化成以id为key的Map，这样noneMatch里的操作只需要判断一次key存不存在即可，整个筛选变成了O(N)的复杂度。
+        Map<String, A> aMap = aList.stream().collect(Collectors.toMap(A::getId, Function.identity())) ;
+        List<A> diffEffective = bList.stream().filter(b -> !aMap.containsKey(b.getId())).collect(Collectors.toList());
+        System.out.println("----------bList 与 aList 的差集为：");
+        System.out.println(diffEffective);
         // aList 与 bList 的交集 (在两个集合中都存在的元素)
         List<A> intersections = aList
                 .stream() //获取第一个集合的Stream1
