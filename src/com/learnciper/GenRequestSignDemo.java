@@ -33,7 +33,6 @@ public class GenRequestSignDemo {
         return buffer.toString();
     }
 
-    // 做项目时切换成Guava的MD5， 这个有问题
     public static String MD5(String input) throws NoSuchAlgorithmException {
         //获取MD5机密实例
         MessageDigest md5 = MessageDigest.getInstance("MD5");
@@ -41,7 +40,7 @@ public class GenRequestSignDemo {
         return byte2hex(byteArr);
     }
 
-    public static String byte2hex(byte[] b) {
+    private static String byte2hex(byte[] b) {
         StringBuilder hs= new StringBuilder();
         String stmp="";
         for (byte value : b) {
@@ -59,10 +58,12 @@ public class GenRequestSignDemo {
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
         Map<String, Object> params = new HashMap<>();
-        params.put("reqeust_no", "230621175012994051431130267648serial");
+        params.put("request_no", "230621175012994051431130267648serial");
         params.put("company_sign", "aaa");
-        String psk = "37y4uxXZXeWtCDRq3z14dEhUhCawb2tM";
+        String psk = "37y4uxXZXeWtCDRq3z14dEhtCCawb2tM";
 
-        System.out.println(MD5(GenRequestSignDemo.genRequestSign(params, psk)));
+        String reqStr = GenRequestSignDemo.genRequestSign(params, psk);
+        System.out.println(reqStr);
+        System.out.println(MD5(reqStr));
     }
 }
