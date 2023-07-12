@@ -1,5 +1,6 @@
 package com.learnconcurrent.concurrentcollection;
 
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -36,6 +37,11 @@ public class LinkedBlockingQueueAppMain {
         }
 
         // TODO put和take可以方便的实现生产者消费者模式
+        BlockingQueue<Integer> queue = new LinkedBlockingQueue<>(10);
+        Thread producer = new Thread(new QueueProducer(queue));
+        Thread consumer = new Thread(new QueueConsumer(queue));
+        producer.start();
+        consumer.start();
 
     }
 }
